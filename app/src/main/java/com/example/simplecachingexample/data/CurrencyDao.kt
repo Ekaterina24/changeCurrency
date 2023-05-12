@@ -14,4 +14,10 @@ interface CurrencyDao {
 
     @Query("DELETE FROM currenciesDb")
     suspend fun deleteAllCurrencies()
+
+    @Query("SELECT count(*) FROM currenciesDb")
+    fun getAllCurrenciesCount(): Int
+
+    @Update
+    suspend fun update(currencyItem: CurrencyDb)
 }

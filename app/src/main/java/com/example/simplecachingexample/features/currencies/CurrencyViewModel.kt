@@ -1,30 +1,24 @@
 package com.example.simplecachingexample.features.currencies
 
-import android.util.Log
 import androidx.lifecycle.*
+import com.example.simplecachingexample.data.CurrencyDatabase
+import com.example.simplecachingexample.data.CurrencyDb
 import com.example.simplecachingexample.data.CurrencyRepository
+//import com.example.simplecachingexample.data.FavoriteCurrencyDb
+import com.example.simplecachingexample.data.FavoriteCurrencyRepository
+//import com.example.simplecachingexample.data.FavoriteCurrencyRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class CurrencyViewModel @Inject constructor(
-    repository: CurrencyRepository
+    repository: CurrencyRepository,
+    db: CurrencyDatabase,
+    favoriteRepository: FavoriteCurrencyRepository
 ): ViewModel() {
     val currencies = repository.getCurrencies().asLiveData()
-
-
-    init {
-        Log.d("viewModel", "onCreate:")
-    }
-
-//    private val restaurantsLiveData = MutableLiveData<List<Restaurant>>()
-//    val restaurants: LiveData<List<Restaurant>> = restaurantsLiveData
-//
-//    init {
-//        viewModelScope.launch {
-//            val restaurants = api.getRestaurants()
-//            delay(2000)
-//            restaurantsLiveData.value = restaurants
-//        }
-//    }
+    val favoriteCurrencies = favoriteRepository.allFavoriteCurrencies
+    val db = db
 }
