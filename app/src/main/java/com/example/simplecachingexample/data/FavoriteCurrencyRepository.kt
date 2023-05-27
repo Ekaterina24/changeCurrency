@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import javax.inject.Inject
 
 class FavoriteCurrencyRepository @Inject constructor(
-    private val db: CurrencyDatabase
+    db: CurrencyDatabase
 ) {
     private val favoriteCurrencyDao = db.favoriteCurrencyDao()
 
@@ -14,10 +14,10 @@ class FavoriteCurrencyRepository @Inject constructor(
             return favoriteCurrencyDao.getAllFavoriteCurrencies()
         }
 
-    suspend fun insertFavoriteCurrency(favoriteCurrency: FavoriteCurrencyDb, onSuccess: () -> Unit) {
+    suspend fun insertFavoriteCurrency(favoriteCurrency: FavoriteCurrencyDb) {
         favoriteCurrencyDao.insert(favoriteCurrency)
     }
-    suspend fun deleteFavoriteCurrency(favoriteCurrency: FavoriteCurrencyDb, onSuccess: () -> Unit) {
+    suspend fun deleteFavoriteCurrency(favoriteCurrency: FavoriteCurrencyDb) {
         favoriteCurrencyDao.delete(favoriteCurrency)
     }
 }

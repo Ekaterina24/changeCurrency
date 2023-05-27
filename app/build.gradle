@@ -3,7 +3,9 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id("kotlin-parcelize")
 }
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
     namespace 'com.example.simplecachingexample'
@@ -78,6 +80,8 @@ dependencies {
     implementation 'androidx.fragment:fragment-ktx:1.5.6'
 
     implementation 'com.google.android.flexbox:flexbox:3.0.0'
+
+    implementation "com.androidplot:androidplot-core:1.5.10"
 }
 
 kapt {

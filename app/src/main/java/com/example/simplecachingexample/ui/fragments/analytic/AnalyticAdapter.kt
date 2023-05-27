@@ -1,4 +1,4 @@
-package com.example.simplecachingexample.features.currencies
+package com.example.simplecachingexample.ui.fragments.analytic
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,44 +8,34 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.simplecachingexample.R
 import com.example.simplecachingexample.data.*
+import com.example.simplecachingexample.databinding.AnalyticItemBinding
 import com.example.simplecachingexample.databinding.CurrencyItemBinding
 
-class CurrencyAdapter(private val onLikeClickListener: (CurrencyDb) -> Unit) :
-    ListAdapter<CurrencyDb, CurrencyAdapter.CurrencyViewHolder>(CurrencyComparator()) {
+class AnalyticAdapter(
+//    private val onLikeClickListener: (AnalyticDb) -> Unit
+) :
+    ListAdapter<CurrencyDb, AnalyticAdapter.AnalyticViewHolder>(CurrencyComparator()) {
 
     var onItemClick: ((CurrencyDb) -> Unit)? = null
-    inner class CurrencyViewHolder(
-        private val binding: CurrencyItemBinding,
-        private val onLikeClickListener: (CurrencyDb) -> Unit
+    inner class AnalyticViewHolder(
+        private val binding: AnalyticItemBinding,
+//        private val onLikeClickListener: (AnalyticDb) -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(currency: CurrencyDb) {
             binding.apply {
                 tvName.text = currency.key
-                tvType.text = currency.value.toString()
-
-                val drawable = if (currency.isFavorite) {
-                    ContextCompat.getDrawable(itemView.context, R.drawable.ic_favorite_24)
-                } else {
-                    ContextCompat.getDrawable(itemView.context, R.drawable.ic_favorite_border_24)
-                }
-
-                ibFavorite.setImageDrawable(drawable)
-
-                ibFavorite.setOnClickListener {
-                    onLikeClickListener(currency)
-                }
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnalyticViewHolder {
         val binding =
-            CurrencyItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return CurrencyViewHolder(binding, onLikeClickListener)
+            AnalyticItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return AnalyticViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: CurrencyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: AnalyticViewHolder, position: Int) {
         val currentItem = getItem(position)
         if (currentItem != null) {
             holder.bind(currentItem)

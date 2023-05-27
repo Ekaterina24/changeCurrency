@@ -10,7 +10,8 @@ interface CurrencyDao {
     fun getAllCurrencies(): Flow<List<CurrencyDb>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCurrencies(currency: List<CurrencyDb>)
+    suspend fun insertCurrencies(currency: List<CurrencyDb>?)
+
 
     @Query("DELETE FROM currenciesDb")
     suspend fun deleteAllCurrencies()
